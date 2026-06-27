@@ -61,9 +61,9 @@ export function Avatar({ mousePosition, scrollProgress }: AvatarProps) {
     }
   }, [actions, scene]);
 
-  // Enhanced mouse tracking (only after intro and when not scrolled away)
+  // Enhanced mouse tracking - always active
   useFrame(() => {
-    if (!introComplete || scrollProgress > 0.5) return; // Disable tracking when scrolled away
+    if (!introComplete) return; // Only wait for intro to complete
 
     if (group.current) {
       // Target rotations based on mouse position

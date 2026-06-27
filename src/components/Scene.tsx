@@ -9,8 +9,8 @@ interface SceneProps {
 }
 
 export function Scene({ mousePosition, scrollProgress }: SceneProps) {
-  // Avatar stays fully visible until scroll = 1.0, then fades quickly
-  const avatarOpacity = scrollProgress >= 1.0 ? Math.max(0, 1 - (scrollProgress - 1.0) * 3) : 1;
+  // Keep avatar visible at all times - no fade out
+  const avatarOpacity = 1;
 
   console.log('Scene rendering - scrollProgress:', scrollProgress, 'opacity:', avatarOpacity);
 
