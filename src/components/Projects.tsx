@@ -124,7 +124,9 @@ export function Projects() {
             <div
               key={index}
               className="project-card-enhanced"
-              ref={(el) => (cardsRef.current[index] = el)}
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
             >
               <div className="project-header">
                 <div className="project-year">{project.year}</div>
