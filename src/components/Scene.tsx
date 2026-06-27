@@ -58,7 +58,7 @@ export function Scene({ mousePosition, scrollProgress }: SceneProps) {
           <meshStandardMaterial color="#00ff88" />
         </mesh>
       }>
-        <Avatar mousePosition={mousePosition} scrollProgress={scrollProgress} />
+        <Avatar mousePosition={mousePosition} />
       </Suspense>
       
       {/* TEST CUBE - To verify 3D rendering works */}

@@ -5,10 +5,9 @@ import * as THREE from 'three';
 
 interface AvatarProps {
   mousePosition: { x: number; y: number };
-  scrollProgress: number;
 }
 
-export function Avatar({ mousePosition, scrollProgress }: AvatarProps) {
+export function Avatar({ mousePosition }: AvatarProps) {
   const group = useRef<THREE.Group>(null);
   const headRef = useRef<THREE.Object3D | null>(null);
   const neckRef = useRef<THREE.Object3D | null>(null);
