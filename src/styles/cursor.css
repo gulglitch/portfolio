@@ -1,0 +1,61 @@
+/* Hide default cursor - but allow text selection */
+body {
+  cursor: none !important;
+  overflow-x: hidden;
+}
+
+a, button, input, textarea, select {
+  cursor: none !important;
+}
+
+/* Allow text to be visible and selectable */
+* {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+}
+
+/* Custom Cursor - Main dot */
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0, 255, 136, 0.9);
+  pointer-events: none;
+  z-index: 10001;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 136, 0.8),
+    0 0 30px rgba(0, 255, 136, 0.5),
+    0 0 45px rgba(0, 255, 136, 0.3);
+  will-change: left, top;
+}
+
+/* Cursor glow - Hidden */
+.custom-cursor-glow {
+  display: none;
+}
+
+/* Hover state - clickable elements */
+.custom-cursor.pointer {
+  width: 35px;
+  height: 35px;
+  background: rgba(0, 136, 255, 0.9);
+  box-shadow: 
+    0 0 20px rgba(0, 136, 255, 0.8),
+    0 0 40px rgba(0, 136, 255, 0.5),
+    0 0 60px rgba(0, 136, 255, 0.3);
+}
+
+.custom-cursor-glow.pointer {
+  display: none;
+}
+
+/* Remove trail effect for better performance */
+.custom-cursor::before {
+  display: none;
+}
