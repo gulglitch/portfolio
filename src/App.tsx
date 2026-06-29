@@ -78,9 +78,14 @@ function App() {
       {/* Navigation Bar - HIGHEST Z-INDEX */}
       <Navigation />
       
-      {/* Mobile: No avatar, just content */}
-      {/* Desktop: Fixed 3D Scene Background */}
-      {!isMobile && (
+      {/* Mobile: Avatar at top of page, static */}
+      {isMobile ? (
+        <div className="mobile-avatar-container">
+          <div className="stars-background" />
+          <Scene mousePosition={mousePosition} scrollProgress={0} />
+        </div>
+      ) : (
+        /* Desktop: Fixed 3D Scene Background */
         <div style={{ 
           position: 'fixed', 
           top: 0, 

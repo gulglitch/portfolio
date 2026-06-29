@@ -1150,6 +1150,26 @@ section {
   }
 }
 
+/* Mobile Avatar Container - Static at top */
+.mobile-avatar-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0; /* Remove any gap */
+}
+
+/* Hide mobile avatar container on desktop */
+@media (min-width: 769px) {
+  .mobile-avatar-container {
+    display: none;
+  }
+}
+
 /* Hide custom cursor on mobile/tablet */
 @media (max-width: 1024px) {
   .custom-cursor,

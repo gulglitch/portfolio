@@ -61,7 +61,7 @@ export function Avatar({ mousePosition }: AvatarProps) {
   }, [actions, scene]);
 
   // Enhanced mouse tracking - always active
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (!introComplete) return; // Only wait for intro to complete
 
     if (group.current) {
@@ -120,9 +120,9 @@ export function Avatar({ mousePosition }: AvatarProps) {
       );
     }
 
-    // Update animation mixer
+    // Update animation mixer using delta time
     if (mixer) {
-      mixer.update(0.01);
+      mixer.update(delta);
     }
   });
 

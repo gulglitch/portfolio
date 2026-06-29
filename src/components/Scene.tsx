@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { Environment, ContactShadows, PerspectiveCamera } from '@react-three/drei';
+import { Environment, PerspectiveCamera } from '@react-three/drei';
 import { Avatar } from './Avatar';
 import { Suspense } from 'react';
 
@@ -14,9 +14,19 @@ export function Scene({ mousePosition, scrollProgress }: SceneProps) {
 
   console.log('Scene rendering - scrollProgress:', scrollProgress, 'opacity:', avatarOpacity);
 
+  // Handle WebGL context loss
+  const handleContextLost = (event: Event) => {
+    event.preventDefault();
+    console.warn('WebGL context lost. Will attempt to restore...');
+  };
+
+  const handleContextRestored = () => {
+    console.log('WebGL context restored successfully');
+  };
+
   return (
     <Canvas
-      shadows
+      shadows="soft"
       style={{ 
         width: '100%',
         height: '100%',
@@ -26,8 +36,17 @@ export function Scene({ mousePosition, scrollProgress }: SceneProps) {
         pointerEvents: 'none',
         transition: 'opacity 0.3s ease-out'
       }}
-      gl={{ alpha: true, antialias: true }}
+      gl={{ 
+        alpha: true, 
+        antialias: true,
+        preserveDrawingBuffer: true,
+        powerPreference: 'high-performance'
+      }}
       dpr={[1, 2]}
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener('webglcontextlost', handleContextLost, false);
+        gl.domElement.addEventListener('webglcontextrestored', handleContextRestored, false);
+      }}
     >
       {/* Fixed Camera - Face Level (Like Reference Portfolio) */}
       <PerspectiveCamera 
@@ -68,13 +87,14 @@ export function Scene({ mousePosition, scrollProgress }: SceneProps) {
       </mesh>
       
       {/* Ground shadow */}
-      <ContactShadows 
+      <mesh 
+        rotation={[-Math.PI / 2, 0, 0]} 
         position={[0, -1.5, 0]} 
-        opacity={0.5} 
-        scale={10} 
-        blur={2.5} 
-        far={4}
-      />
+        receiveShadow
+      >
+        <planeGeometry args={[10, 10]} />
+        <shadowMaterial opacity={0.3} />
+      </mesh>
       
       {/* Environment lighting */}
       <Environment preset="city" />
