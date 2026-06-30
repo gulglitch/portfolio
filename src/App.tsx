@@ -6,7 +6,7 @@ import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Navigation } from './components/Navigation';
-import { CustomCursor } from './components/CustomCursor';
+import { AuroraPlayground } from './components/AuroraPlayground';
 import { useMousePosition } from './hooks/useMousePosition';
 import './styles/globals.css';
 
@@ -38,17 +38,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Track scroll position - keep avatar visible throughout the page
+    // Track scroll position - calculate avatar position transition
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
       
-      // Calculate scroll progress normalized to entire page (0 to 1 for full page)
-      // Only fade out in the very last section
-      const maxScroll = documentHeight - windowHeight;
-      const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
-      setScrollProgress(progress);
+      // Calculate scroll progress for the Hero section only (0 to 1)
+      // Hero section is 100vh, so we transition during the first viewport height
+      const heroScrollProgress = Math.min(scrollY / windowHeight, 1);
+      
+      setScrollProgress(heroScrollProgress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -72,8 +71,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* Custom Glowing Cursor - Desktop only */}
-      {!isMobile && <CustomCursor />}
+      {/* Aurora Playground - Interactive colorful background - Desktop only */}
+      {!isMobile && <AuroraPlayground />}
 
       {/* Navigation Bar - HIGHEST Z-INDEX */}
       <Navigation />
@@ -92,16 +91,19 @@ function App() {
           left: 0, 
           width: '100%', 
           height: '100vh', 
-          zIndex: -1,
-          transform: 'translateX(0)',
-          transition: 'transform 0.3s ease-out'
+          zIndex: 1,
+          // Smooth transition from center (50%) to left (20%) as user scrolls
+          // Using cubic-bezier for smooth easing
+          transform: `translateX(${-30 * scrollProgress}%)`,
+          transition: 'transform 0.1s ease-out'
         }}>
           <div className="stars-background" />
           <Scene mousePosition={mousePosition} scrollProgress={scrollProgress} />
+          {/* Glow is inside the same container, so it moves together with avatar */}
           <div style={{
             position: 'absolute',
             top: '50%',
-            left: '20%',
+            left: '50%',
             transform: 'translate(-50%, -50%)',
             width: '800px',
             height: '800px',
