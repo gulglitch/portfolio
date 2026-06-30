@@ -45,16 +45,18 @@ export function Contact() {
 
           <div className="contact-methods">
             <a 
-              href="mailto:gulezahra235@gmail.com" 
+              href="https://drive.google.com/file/d/1T32lzGTcD0aNQBD745u1fpJdpGKPT2L5/view?usp=drive_link" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="contact-card"
             >
               <div className="contact-icon">
                 <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
                 </svg>
               </div>
-              <h3>Email</h3>
-              <p>gulezahra235@gmail.com</p>
+              <h3>Resume</h3>
+              <p>View my resume</p>
             </a>
 
             <a 
@@ -90,7 +92,9 @@ export function Contact() {
 
           <div className="contact-cta">
             <a 
-              href="mailto:gulezahra235@gmail.com" 
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=gulezahra235@gmail.com&su=Hello!&body=Hi Gul-e-Zara," 
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary btn-large"
             >
               Send me an email
