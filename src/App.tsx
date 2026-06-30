@@ -93,9 +93,7 @@ function App() {
           width: '100%', 
           height: '100vh', 
           zIndex: -1,
-          transform: scrollProgress < 0.2 
-            ? `translateX(${-scrollProgress * 150}%)` 
-            : 'translateX(-30%)',
+          transform: 'translateX(0)',
           transition: 'transform 0.3s ease-out'
         }}>
           <div className="stars-background" />
@@ -103,7 +101,7 @@ function App() {
           <div style={{
             position: 'absolute',
             top: '50%',
-            left: '50%',
+            left: '20%',
             transform: 'translate(-50%, -50%)',
             width: '800px',
             height: '800px',
