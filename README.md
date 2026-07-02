@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive portfolio website built with React, TypeScript, and Three.js featuring 3D animations and aurora effects.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **3D Avatar** - Interactive Three.js scene with animated hijabi avatar
+- **Aurora Playground** - Dynamic rainbow aurora background effects
+- **Smooth Animations** - Framer Motion powered transitions
+- **Responsive Design** - Mobile-optimized layout with touch interactions
+- **Custom Cursor** - Rainbow trail cursor effect
+- **Dark Theme** - Modern dark mode interface
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18
+- TypeScript
+- Vite
+- Three.js / React Three Fiber
+- Framer Motion
+- TailwindCSS
 
-## Expanding the ESLint configuration
+## Quick Start
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Install dependencies
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Start development server
+npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Build for production
+npm run build
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── components/
+│   ├── Hero.tsx           # Landing section with avatar
+│   ├── About.tsx          # About section
+│   ├── Projects.tsx       # Projects showcase
+│   ├── Skills.tsx         # Skills display
+│   ├── Contact.tsx        # Contact form
+│   ├── Scene.tsx          # Three.js 3D scene
+│   ├── Avatar.tsx         # 3D avatar component
+│   ├── AuroraPlayground.tsx # Aurora effects
+│   └── Navigation.tsx     # Main navigation
+├── hooks/
+│   └── useMousePosition.ts # Mouse tracking hook
+└── styles/
+    ├── globals.css        # Global styles
+    └── cursor.css         # Custom cursor styles
+```
+
+## Development
+
+Built with Vite for fast HMR and optimized builds. Uses React Three Fiber for 3D rendering and Framer Motion for smooth animations.
+
+## License
+
+MIT
