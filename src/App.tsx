@@ -71,20 +71,14 @@ function App() {
 
   return (
     <div className="App">
-      {/* Aurora Playground - Interactive colorful background - Desktop only */}
+      {/* Aurora Playground - Desktop only */}
       {!isMobile && <AuroraPlayground />}
 
-      {/* Navigation Bar - HIGHEST Z-INDEX */}
-      <Navigation />
+      {/* Navigation Bar */}
+      <Navigation isMobile={isMobile} />
       
-      {/* Mobile: Avatar at top of page, static */}
-      {isMobile ? (
-        <div className="mobile-avatar-container">
-          <div className="stars-background" />
-          <Scene mousePosition={mousePosition} scrollProgress={0} />
-        </div>
-      ) : (
-        /* Desktop: Fixed 3D Scene Background */
+      {/* Desktop Only: Fixed 3D Scene Background */}
+      {!isMobile && (
         <div style={{ 
           position: 'fixed', 
           top: 0, 
@@ -92,14 +86,12 @@ function App() {
           width: '100%', 
           height: '100vh', 
           zIndex: 1,
-          // Smooth transition from center (50%) to left (20%) as user scrolls
-          // Using cubic-bezier for smooth easing
           transform: `translateX(${-30 * scrollProgress}%)`,
           transition: 'transform 0.1s ease-out'
         }}>
           <div className="stars-background" />
           <Scene mousePosition={mousePosition} scrollProgress={scrollProgress} />
-          {/* Glow is inside the same container, so it moves together with avatar */}
+          {/* Glow effect */}
           <div style={{
             position: 'absolute',
             top: '50%',
@@ -120,7 +112,7 @@ function App() {
         </div>
       )}
       
-      {/* Scrollable Content - ABOVE CANVAS */}
+      {/* Scrollable Content */}
       <div style={{ position: 'relative', zIndex: 100 }}>
         {/* Hero Section */}
         <div id="hero" style={{ position: 'relative', zIndex: 1 }}>
