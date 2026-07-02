@@ -1,14 +1,30 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import heroImage from '../assets/my-img-portfolio.png';
 
 export function Hero() {
   const introRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const starsRef = useRef<HTMLDivElement>(null);
+  const mobileImageRef = useRef<HTMLImageElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (introRef.current && nameRef.current && infoRef.current) {
+    // Detect mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Desktop animations
+    if (!isMobile && introRef.current && nameRef.current && infoRef.current) {
       // Cool staggered entrance animation
       const tl = gsap.timeline({ delay: 0.2 });
       
@@ -67,6 +83,21 @@ export function Hero() {
       });
     }
 
+    // Mobile image animation
+    if (isMobile && mobileImageRef.current) {
+      gsap.fromTo(mobileImageRef.current,
+        { opacity: 0, scale: 0.8, y: 30 },
+        { 
+          opacity: 1, 
+          scale: 1,
+          y: 0,
+          duration: 1.2, 
+          ease: 'power3.out',
+          delay: 0.3
+        }
+      );
+    }
+
     // Animate stars
     if (starsRef.current) {
       gsap.to(starsRef.current, {
@@ -77,28 +108,41 @@ export function Hero() {
         ease: 'sine.inOut'
       });
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <section className="hero-section" id="hero">
       {/* Sparkly Stars Background - Local to Hero */}
       <div ref={starsRef} className="hero-stars-bg" />
       
-      <div className="hero-container">
-        {/* Left Side - Intro */}
-        <div className="hero-intro" ref={introRef}>
-          <h2>Hello! I'm</h2>
-          <h1 ref={nameRef}>
-            GUL-E-ZARA
-          </h1>
+      {/* Mobile: Show Image */}
+      {isMobile ? (
+        <div className="hero-mobile-image-container">
+          <img 
+            ref={mobileImageRef}
+            src={heroImage} 
+            alt="Gul-e-Zara Portfolio" 
+            className="hero-mobile-image"
+          />
         </div>
+      ) : (
+        /* Desktop: Show Text */
+        <div className="hero-container">
+          {/* Left Side - Intro */}
+          <div className="hero-intro" ref={introRef}>
+            <h2>Hello! I'm</h2>
+            <h1 ref={nameRef}>
+              GUL-E-ZARA
+            </h1>
+          </div>
 
-        {/* Right Side - Title */}
-        <div className="hero-info" ref={infoRef}>
-          <h2 className="hero-info-title">FULL-STACK DEVELOPER</h2>
-          <h3 className="hero-info-subtitle">AI/ML ENTHUSIAST</h3>
+          {/* Right Side - Title */}
+          <div className="hero-info" ref={infoRef}>
+            <h2 className="hero-info-title">FULL-STACK DEVELOPER</h2>
+            <h3 className="hero-info-subtitle">AI/ML ENTHUSIAST</h3>
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
