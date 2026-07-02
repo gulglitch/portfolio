@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Scene } from './components/Scene';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -71,6 +72,9 @@ function App() {
 
   return (
     <div className="App">
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
+
       {/* Aurora Playground - Desktop only */}
       {!isMobile && <AuroraPlayground />}
 

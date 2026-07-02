@@ -1,14 +1,14 @@
 import { useEffect, useRef } from 'react';
 
 interface Blob {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  life: number;
-  maxLife: number;
-  hue: number;
+  x: number;                 //horizontal position 
+  y: number;                 //vertical position 
+  vx: number;                //velocity in x direction 
+  vy: number;                //velocity in y direction
+  size: number;              //radius of the blob in pixels 
+  life: number;              //current age
+  maxLife: number;           //maximum lifespan before it disappears 
+  hue: number;               //color on the rainbow wheel 
 }
 
 export function AuroraPlayground() {
